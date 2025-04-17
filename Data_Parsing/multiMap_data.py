@@ -11,10 +11,10 @@ class Food_Data:
         # of the food item and the value would be food data as a list. The dictionary is not sorted. This Data cannot be
         # accessed directly.
         self._data = dict()
-        # This array will hold a list of arrays where each inner array is an array of tuples. The tuples will contain
-        # two elements the value of the nutrient and the ID of the food item. While the value of the nutrient may not be
-        # unique the ID will be. The inner arrays will be sorted based on the value of the nutrient selected. The outer
-        # array will not be sorted.
+        # This array will hold a list of dictionaries which each correspond to a specific nutrient. The keys in the
+        # dictionaries would be the value for that nutrition and the value in the pair would be a list of the id's of
+        # the food items that correspond to the nutritional value. The outer array is not sorted but the dictionaries
+        # are sorted by their keys. The list of IDs are not sorted.
         self.interface = list()
         # Initializes all the inner arrays.
         self._initialize_interface(length)
@@ -23,11 +23,9 @@ class Food_Data:
 
     def add_data(self, Data):
         """
-
         Adds the list of nutrients of the food specified in Data to the base dictionary and the interface. Warning: does
         not check if the nutrients in the input match the ones currently in the dataset. It also does not check if they
         are in the correct order either.
-
         :param list Data: A list of data corresponding to a specific food item.
         :rtype: None
         :raises ValueError: Will throw an exception if the data has more or less nutrients than what the class was
@@ -39,7 +37,8 @@ class Food_Data:
                              + "with.")
         # Since each food item has a unique ID it creates a new key-value pair for the food item.
         self._data[Data[2]] = Data
-        # Add the nutrient-ID tuple to the respective inner array.
+        # Adds the ID to the nutrient list otherwise adds a new key value pair that is nutrient value for the key and
+        # a list of food ids.
         for i in range(len(self.interface)):
             if Data[i+3] in self.interface[i].keys():
                 self.interface[i][Data[i+3]].append(Data[i+3])
@@ -48,8 +47,8 @@ class Food_Data:
 
     def _initialize_interface(self, length):
         """
-        Initializes all the inner arrays to empty.
-        :param int length: The number of inner arrays needed.
+        Initializes all the inner dictionaries to empty.
+        :param int length: The number of dictionaries needed.
         """
         for i in range(length):
             self.interface.append(dict())
