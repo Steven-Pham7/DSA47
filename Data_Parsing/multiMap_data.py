@@ -1,3 +1,4 @@
+from sortedcontainers import sorteddict
 class Food_Data:
     """
     The class that will function as the data structure for our data.
@@ -41,9 +42,9 @@ class Food_Data:
         # a list of food ids.
         for i in range(len(self.interface)):
             if Data[i+3] in self.interface[i].keys():
-                self.interface[i][Data[i+3]].append(Data[i+3])
+                self.interface[i][Data[i+3]].append(Data[2])
             else:
-                self.interface[i][Data[i+3]] = [Data[i+3]]
+                self.interface[i][Data[i+3]] = [Data[2]]
 
     def _initialize_interface(self, length):
         """
@@ -63,6 +64,12 @@ class Food_Data:
         """
         return self._data[ID]
 
+    def sort_interface(self):
+        """
+        Sorts the interface using the sortedcontainers library. Link: https://pypi.org/project/sortedcontainers/
+        """
+        for i in range(len(self.interface)):
+            self.interface[i] = sorteddict.SortedDict(self.interface[i])
 
 
 
