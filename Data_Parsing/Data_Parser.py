@@ -4,5 +4,15 @@ from multiMap_data import Food_Data
 
 
 def Parse_data():
-    pass
+    test = Food_Data(1)
+    testData = ["t", "u", 8, 2]
+    testData2 = ["t", "u", 4, 3]
+    testData3 = ["t", "u", 2, 1]
+    test.add_data(testData)
+    test.add_data(testData2)
+    test.add_data(testData3)
+    print(test.interface)
+
+
+Parse_data()
 

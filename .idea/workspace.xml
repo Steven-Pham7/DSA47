@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b45ec52-69a5-43a4-9306-93ab15d77660" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Data_Parsing/multiMap_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Parsing/Data_Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Parsing/Data_Parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Parsing/multiMap_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Parsing/multiMap_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.Data_Parser.executor": "Debug",
+    "Python.multiMap_data.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Javier's-Branch"
@@ -67,5 +67,21 @@
       <updated>1744835937612</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Parsing/Data_Parser.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Parsing/Data_Parser.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
