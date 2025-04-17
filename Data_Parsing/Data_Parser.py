@@ -11,6 +11,7 @@ def Parse_data():
     test.add_data(testData)
     test.add_data(testData2)
     test.add_data(testData3)
+    test.sort_interface()
     print(test.interface)
 
 
