@@ -38,10 +38,13 @@ class Food_Data:
             raise ValueError("The number of nutrients in the data is not the same as what the interface was initialized"
                              + "with.")
         # Since each food item has a unique ID it creates a new key-value pair for the food item.
-        self.data[Data[2]] = Data
+        self._data[Data[2]] = Data
         # Add the nutrient-ID tuple to the respective inner array.
         for i in range(len(self.interface)):
-            self.interface[i].append((Data[i+3], Data[2]))
+            if Data[i+3] in self.interface[i].keys():
+                self.interface[i][Data[i+3]].append(Data[i+3])
+            else:
+                self.interface[i][Data[i+3]] = [Data[i+3]]
 
     def _initialize_interface(self, length):
         """
@@ -49,7 +52,7 @@ class Food_Data:
         :param int length: The number of inner arrays needed.
         """
         for i in range(length):
-            self.interface.append(list())
+            self.interface.append(dict())
 
     def get_data(self, ID):
         """
@@ -60,3 +63,8 @@ class Food_Data:
         :raises KeyError: If the ID does not exist in the data.
         """
         return self._data[ID]
+
+
+
+
+
