@@ -78,3 +78,8 @@ class Food_Data:
         for i in range(len(self.interface)):
             self.interface[i] = sorteddict.SortedDict(self.interface[i])
 
+    def get_Max_Interface(self):
+        answer = []
+        for nutrient in self.interface:
+            answer.append(nutrient.keys()[-1])
+        return answer
