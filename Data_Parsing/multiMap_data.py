@@ -1,4 +1,6 @@
 from sortedcontainers import sorteddict
+
+
 class Food_Data:
     """
     The class that will function as the data structure for our data.
@@ -19,8 +21,6 @@ class Food_Data:
         self.interface = list()
         # Initializes all the inner arrays.
         self._initialize_interface(length)
-        # The file path of the raw data.
-        self.filePath = "../Data/food.csv"
 
     def add_data(self, Data):
         """
@@ -70,7 +70,4 @@ class Food_Data:
         """
         for i in range(len(self.interface)):
             self.interface[i] = sorteddict.SortedDict(self.interface[i])
-
-
-
 
