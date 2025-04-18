@@ -20,7 +20,7 @@ def Parse_data(filePath, labelFilePath, offset, idColumn):
     labels = pd.read_csv(labelFilePath).columns
     # Initializes our return value. It assumes that the non-interface columns are at the beginning of the csv file for
     # both file paths.
-    data = Food_Data(len(labels)-offset)
+    data = Food_Data(len(labels), offset, idColumn)
     # Takes the value of the data at a specific row with columns specified by label file and adds them to the instance '
     # of food data.
     for index in df.index:
