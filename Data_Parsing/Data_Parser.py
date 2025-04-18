@@ -2,7 +2,7 @@ import pandas as pd
 from multiMap_data import Food_Data
 
 
-def Parse_data(filePath, labelFilePath, offset):
+def Parse_data(filePath, labelFilePath, offset, idColumn):
     """
     Takes a csv sheet of the data and filters the data we want from every food item. Lastly it inserts the data into the
     Food_Data data structure. Warning does not take into account missing values.
@@ -10,6 +10,7 @@ def Parse_data(filePath, labelFilePath, offset):
     :param str labelFilePath: A string containing the file path for the columns we which to include. Assuming the column
         named are listed in a one-dimensional csv.
     :param int offset: The number of columns that should not be included in the interface but should be in the data.
+    :param int idColumn: The index of the column where a unique id is held in the data csv file.
     :rtype: Food_Data
     :returns: A Food_Data instance containing all the data in the filePath csv with the columns being the data in
         labelFilePath csv.

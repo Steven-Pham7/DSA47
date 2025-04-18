@@ -5,10 +5,12 @@ class Food_Data:
     """
     The class that will function as the data structure for our data.
     """
-    def __init__(self, length):
+    def __init__(self, length, offset, idColumn):
         """
         Initializes the multiMap_Data class with the initial arrays and dictionaries empty.
         :param int length: The number of nutrients that the interface would have.
+        :param int offset: The number of columns in the data but not the interface.
+        :param int idColumn: The index of the column where a unique id is held.
         """
         # This is the dictionary that will store the food data. It will be a dictionary of lists where the key is the ID
         # of the food item and the value would be food data as a list. The dictionary is not sorted. This Data cannot be
@@ -20,7 +22,12 @@ class Food_Data:
         # are sorted by their keys. The list of IDs are not sorted.
         self.interface = list()
         # Initializes all the inner arrays.
-        self._initialize_interface(length)
+        self._initialize_interface(length-offset)
+        # The offset representing how many columns are in the data and not in the interface. Will assume that these
+        # columns are all towards the start of the data.
+        self._offset = offset
+        # Initialize the index of the id column.
+        self._idColumn = idColumn
 
     def add_data(self, Data):
         """
@@ -42,9 +49,9 @@ class Food_Data:
         # a list of food ids.
         for i in range(len(self.interface)):
             if Data[i+3] in self.interface[i].keys():
-                self.interface[i][Data[i+3]].append(Data[2])
+                self.interface[i][Data[i+self._offset]].append(Data[self._idColumn])
             else:
-                self.interface[i][Data[i+3]] = [Data[2]]
+                self.interface[i][Data[i+self._offset]] = [Data[self._idColumn]]
 
     def _initialize_interface(self, length):
         """
