@@ -1,19 +1,20 @@
-import pandas
+import pandas as pd
 import numpy
 from multiMap_data import Food_Data
 
 
-def Parse_data():
-    test = Food_Data(1)
-    testData = ["t", "u", 8, 2]
-    testData2 = ["t", "u", 4, 3]
-    testData3 = ["t", "u", 2, 1]
-    test.add_data(testData)
-    test.add_data(testData2)
-    test.add_data(testData3)
-    test.sort_interface()
-    print(test.interface)
+def Parse_data(filePath):
+    df = pd.read_csv(filePath)
+    data = Food_Data(1)
+    names = ["Category","Description","Nutrient Data Bank Number","Data.Alpha Carotene"]
+    for index in df.index:
+        row = df.loc[index]
+        temp = []
+        for lable in names:
+            temp.append(row[lable])
+        data.add_data(temp)
+    data.sort_interface()
+    print(data.interface)
 
 
-Parse_data()
-
+Parse_data("../Data/food.csv")
