@@ -232,7 +232,7 @@ elif st.session_state.step == 3:
         st.session_state.data_frame = pd.DataFrame()
         
 
-    st.write("need output")
+
     # st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0],
     #                                                             st.session_state.slider_range1, "Jump",
     #                                                             st.session_state.data)
@@ -247,66 +247,92 @@ elif st.session_state.step == 3:
             for result in st.session_state.list1:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",
-                                                   "Nutrient Data Bank Number"] + st.session_state.options
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
         elif len(st.session_state.info) == 2:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
             st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Jump", st.session_state.data)
-            for result in st.session_state.list1:
+            finalList = []
+            for id in st.session_state.list1:
+                if id in st.session_state.list2:
+                    finalList.append(id)
+            for result in finalList:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list2:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",
-                                                   "Nutrient Data Bank Number"] + st.session_state.options
+            # for result in st.session_state.list2:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
         elif len(st.session_state.info) == 3:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
             st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Jump", st.session_state.data)
             st.session_state.list3 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[2], st.session_state.slider_range3, "Jump", st.session_state.data)
-            for result in st.session_state.list1:
+            finalList = []
+            for id in st.session_state.list1:
+                if id in st.session_state.list2 and id in st.session_state.list3:
+                    finalList.append(id)
+            for result in finalList:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list2:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list3:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",
-                                                   "Nutrient Data Bank Number"] + st.session_state.options
+            # for result in st.session_state.list2:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            # for result in st.session_state.list3:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
     elif st.session_state.searching_Algo == "Exponential Search":
         if len(st.session_state.info) == 1:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
             for result in st.session_state.list1:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",
-                                                   "Nutrient Data Bank Number"] + st.session_state.options
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
         elif len(st.session_state.info) == 2:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
             st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Exponential", st.session_state.data)
-            for result in st.session_state.list1:
+            finalList = []
+            for id in st.session_state.list1:
+                if id in st.session_state.list2:
+                    finalList.append(id)
+            for result in finalList:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list2:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",
-                                                   "Nutrient Data Bank Number"] + st.session_state.options
+            # for result in st.session_state.list2:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
         elif len(st.session_state.info) == 3:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
             st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Exponential", st.session_state.data)
             st.session_state.list3 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[2], st.session_state.slider_range3, "Exponential", st.session_state.data)
-            for result in st.session_state.list1:
+            finalList = []
+            for id in st.session_state.list1:
+                if id in st.session_state.list2 and id in st.session_state.list3:
+                    finalList.append(id)
+            for result in finalList:
                 temp = pd.DataFrame([st.session_state.data.get_data(result)])
                 st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list2:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            for result in st.session_state.list3:
-                temp = pd.DataFrame([st.session_state.data.get_data(result)])
-                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
-            st.session_state.data_frame.columns = ["Category", "Description",  "Nutrient Data Bank Number"] + st.session_state.options
+            # for result in st.session_state.list2:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            # for result in st.session_state.list3:
+            #     temp = pd.DataFrame([st.session_state.data.get_data(result)])
+            #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+            if st.session_state.data_frame.size > 0:
+                st.session_state.data_frame.columns = ["Category", "Description",
+                                                       "Nutrient Data Bank Number"] + st.session_state.options
 
-    st.dataframe(st.session_state.data_frame)
+    if st.session_state.data_frame.size > 0:
+        st.dataframe(st.session_state.data_frame)
+    else:
+        st.write("No Items matching the criteria")
