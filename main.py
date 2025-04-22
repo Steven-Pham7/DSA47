@@ -80,7 +80,7 @@ def go_step3():
 # Go to the first step
 if st.session_state.step == 1:
     dataFilePath = ".\\Data\\food.csv"
-    labelFilePath = ".\\Data\\food.csv"
+    labelFilePath = ".\\Data\\labels.csv"
     st.session_state.data = Data_Parser.Parse_data(dataFilePath, labelFilePath, 3, 2)
     st.subheader("Nutrient Selector (3 max)")
     # Represents the columns (nutrition)
