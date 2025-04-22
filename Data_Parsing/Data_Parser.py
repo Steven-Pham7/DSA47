@@ -51,4 +51,3 @@ def getMaxValues(FoodData, labels, offset):
     for maxValue, label in zip(maxValues, labels[offset:]):
         answer[label] = maxValue
     return answer
-

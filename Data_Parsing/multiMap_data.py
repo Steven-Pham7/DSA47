@@ -80,5 +80,5 @@ class Food_Data:
     def get_Max_Interface(self):
         answer = []
         for nutrient in self.interface:
-            answer.append(nutrient.keys()[-1])
+            answer.append(float(nutrient.keys()[-1]))
         return answer

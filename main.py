@@ -202,25 +202,25 @@ elif st.session_state.step == 2:
 # step 3
 elif st.session_state.step == 3:
 
-    option_index = {}
-    option_index["Carbohydrates"] = 0
-    option_index["Cholesterol"] = 1
-    option_index["Fiber"] = 2
-    option_index["Protein"] = 3
-    option_index["Total Sugar"] = 4
-    option_index["Monosaturated Fat"] = 5
-    option_index["Polysaturated Fat"] = 6
-    option_index["Saturated Fat"] = 7
-    option_index["Calcium"] = 8
-    option_index["Iron"] = 9
-    option_index["Magnesium"] = 10
-    option_index["Potassium"] = 11
-    option_index["Sodium (Salt)"] = 12
-    option_index["Vitamin A"] = 13
-    option_index["Vitamin B12"] = 14
-    option_index["Vitamin C"] = 15
-    option_index["Vitamin E"] = 16
-    option_index["Vitamin K"] = 17
+    # option_index = {}
+    # option_index["Carbohydrates"] = 0
+    # option_index["Cholesterol"] = 1
+    # option_index["Fiber"] = 2
+    # option_index["Protein"] = 3
+    # option_index["Total Sugar"] = 4
+    # option_index["Monosaturated Fat"] = 5
+    # option_index["Polysaturated Fat"] = 6
+    # option_index["Saturated Fat"] = 7
+    # option_index["Calcium"] = 8
+    # option_index["Iron"] = 9
+    # option_index["Magnesium"] = 10
+    # option_index["Potassium"] = 11
+    # option_index["Sodium (Salt)"] = 12
+    # option_index["Vitamin A"] = 13
+    # option_index["Vitamin B12"] = 14
+    # option_index["Vitamin C"] = 15
+    # option_index["Vitamin E"] = 16
+    # option_index["Vitamin K"] = 17
 
     if "list1" not in st.session_state:
         st.session_state.list1 = ()
@@ -234,11 +234,11 @@ elif st.session_state.step == 3:
 
     st.write("need output")
     if st.session_state.searching_Algo == "Jump Search":
-        st.session_state.list1 = Search_Algorithims.search_nutrient(option_index[st.session_state.info[0]], st.session_state.slider_range1, "Jump", st.session_state.data)
+        st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
         for something in st.session_state.list1:
             temp = pd.DataFrame([st.session_state.data.get_data(something)])
             st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
     elif st.session_state.searching_Algo == "Exponential Search":
-        st.session_state.list1 = Search_Algorithims.search_nutrient(option_index[st.session_state.info[0]], st.session_state.slider_range1, "Exponential", st.session_state.data)
+        st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
 
     st.dataframe(st.session_state.data_frame)
