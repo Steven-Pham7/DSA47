@@ -42,6 +42,8 @@ if "step" not in st.session_state:
     st.session_state.step = 1
 if "info" not in st.session_state:
     st.session_state.info = []
+if "infoIndex" not in st.session_state:
+    st.session_state.infoIndex = []
 
 def go_step2():
     st.session_state.step = 2
@@ -50,8 +52,8 @@ def go_step3():
     st.session_state.step = 3
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FIX FILE PATHS
-st.session_state.dataFilePath = "/Users/Steven/Downloads/connecting 4-21/DSA47/Data/food.csv"
-st.session_state.labelFilePath = "/Users/Steven/Downloads/connecting 4-21/DSA47/Data/labels.csv"
+st.session_state.dataFilePath = "./Data/food.csv"
+st.session_state.labelFilePath = "./Data/labels.csv"
 st.session_state.data = Data_Parser.Parse_data(st.session_state.dataFilePath, st.session_state.labelFilePath, 3, 2)
 
 # Go to the first step
@@ -59,26 +61,27 @@ if st.session_state.step == 1:
 
     st.subheader("Nutrient Selector (3 max)")
     # Represents the columns (nutrition)
-    options = [
-        "Carbohydrates",
-        "Cholesterol",
-        "Fiber",
-        "Protein",
-        "Total Sugar",
-        "Monosaturated Fat",
-        "Polysaturated Fat",
-        "Saturated Fat",
-        "Calcium",
-        "Iron",
-        "Magnesium",
-        "Potassium",
-        "Sodium (Salt)",
-        "Vitamin A",
-        "Vitamin B12",
-        "Vitamin C",
-        "Vitamin E",
-        "Vitamin K",
-    ]
+    st.session_state.options = Data_Parser.pretitfyLabels(st.session_state.labelFilePath, 3)
+    #     [
+    #     "Carbohydrates",
+    #     "Cholesterol",
+    #     "Fiber",
+    #     "Protein",
+    #     "Total Sugar",
+    #     "Monosaturated Fat",
+    #     "Polysaturated Fat",
+    #     "Saturated Fat",
+    #     "Calcium",
+    #     "Iron",
+    #     "Magnesium",
+    #     "Potassium",
+    #     "Sodium (Salt)",
+    #     "Vitamin A",
+    #     "Vitamin B12",
+    #     "Vitamin C",
+    #     "Vitamin E",
+    #     "Vitamin K",
+    # ]
 
     # create dictionary we will use later
     checked = {}
@@ -86,17 +89,19 @@ if st.session_state.step == 1:
     if "counter" not in st.session_state:
         st.session_state.counter = 0
     # creates the checkboxes
-    for nutrients in options:
+    for nutrients in st.session_state.options:
         checked[nutrients] = st.checkbox(label=nutrients, key=nutrients)
 
     st.session_state.counter = 0
     # clears st.sesstion_state.info to allow it to be free of any elements during the append
     st.session_state.info.clear()
+    st.session_state.infoIndex.clear()
     # incrementents the counter by the number of checkboxes selected
-    for nutrients in options:
-        if checked[nutrients] == True:
+    for i in range(len(st.session_state.options)):
+        if checked[st.session_state.options[i]]:
             st.session_state.counter += 1
-            st.session_state.info.append(nutrients)
+            st.session_state.info.append(st.session_state.options[i])
+            st.session_state.infoIndex.append(i)
 
     # conditionals if the user has selected a valid number of checkboxes or not
     if st.button("Submit"):
@@ -126,29 +131,29 @@ elif st.session_state.step == 2:
     # if searching goes wrong, recheck max values to see if they are exact
     # dictionary of the columns max values
     # all values are floats, true values are commented if they were reduced to 1 decimal place
-    max_value = {}
-    max_value["Carbohydrates"] = 100.0
-    max_value["Cholesterol"] = 3074.0
-    max_value["Fiber"] = 46.2
-    # 78.13
-    max_value["Protein"] = 78.2
-    max_value["Total Sugar"] = 99.8
-    # 75.221
-    max_value["Monosaturated Fat"] = 75.3
-    # 67.849
-    max_value["Polysaturated Fat"] = 67.9
-    max_value["Saturated Fat"] = 82.5
-    max_value["Calcium"] = 1375.0
-    max_value["Iron"] = 64.1
-    max_value["Magnesium"] = 611.0
-    max_value["Potassium"] = 6040.0
-    max_value["Sodium (Salt)"] = 7851.0
-    max_value["Vitamin A"] = 9363.0
-    # 82.5
-    max_value["Vitamin B12"] = 82.5
-    max_value["Vitamin C"] = 560.0
-    max_value["Vitamin E"] = 149.4
-    max_value["Vitamin K"] = 1640.0
+    max_value = Data_Parser.getMaxValues(st.session_state.data, st.session_state.options, 0)
+    # max_value["Carbohydrates"] = 100.0
+    # max_value["Cholesterol"] = 3074.0
+    # max_value["Fiber"] = 46.2
+    # # 78.13
+    # max_value["Protein"] = 78.2
+    # max_value["Total Sugar"] = 99.8
+    # # 75.221
+    # max_value["Monosaturated Fat"] = 75.3
+    # # 67.849
+    # max_value["Polysaturated Fat"] = 67.9
+    # max_value["Saturated Fat"] = 82.5
+    # max_value["Calcium"] = 1375.0
+    # max_value["Iron"] = 64.1
+    # max_value["Magnesium"] = 611.0
+    # max_value["Potassium"] = 6040.0
+    # max_value["Sodium (Salt)"] = 7851.0
+    # max_value["Vitamin A"] = 9363.0
+    # # 82.5
+    # max_value["Vitamin B12"] = 82.5
+    # max_value["Vitamin C"] = 560.0
+    # max_value["Vitamin E"] = 149.4
+    # max_value["Vitamin K"] = 1640.0
 
     # creates a form where it doesn't rerun when value changes.
     # when user submits, then it changes

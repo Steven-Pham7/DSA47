@@ -33,10 +33,10 @@ def Parse_data(filePath, labelFilePath, offset, idColumn):
     return data
 
 
-def pretitfyLabels(labelFilePath):
+def pretitfyLabels(labelFilePath, offset):
     labels = pd.read_csv(labelFilePath).columns
     prettyLabels = []
-    for label in labels:
+    for label in labels[offset:]:
         temp = label.replace("Data.",'')
         temp = temp.replace("Fat.", '')
         temp = temp.replace("Major Minerals.", '')
