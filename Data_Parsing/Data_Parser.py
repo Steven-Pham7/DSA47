@@ -1,6 +1,5 @@
 import pandas as pd
-from multiMap_data import Food_Data
-
+from Data_Parsing.multiMap_data import Food_Data
 
 def Parse_data(filePath, labelFilePath, offset, idColumn):
     """
@@ -46,10 +45,10 @@ def pretitfyLabels(labelFilePath):
     return prettyLabels
 
 
-def getMaxValues(FoodData, labels):
+def getMaxValues(FoodData, labels, offset):
     maxValues = FoodData.get_Max_Interface()
     answer = dict()
-    for maxValue, label in zip(maxValues, labels[3:]):
+    for maxValue, label in zip(maxValues, labels[offset:]):
         answer[label] = maxValue
     return answer
 
