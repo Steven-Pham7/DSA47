@@ -17,23 +17,6 @@ from Data_Parsing.multiMap_data import Food_Data
 
 st.title("DSA Group 47: Food Finder")
 
-comment1 = (
-'''
-st.subheader("DataFrame")
-
-# from "data elements" chapter in streamlit tutorial
-# pandas dataframe, might be used to organize the final output
-df = pd.DataFrame({
-    'Food': ['milk', 'pizza', 'applesauce'],
-    'sugar': ['50','350','80'],
-    'protein': ['5','20','0'],
-})
-
-# displays the pandas dataframe in a nice table
-st.dataframe(df)
-'''
-)
-
 # Creates 2 session states
 # step handles what step the user in on
 # info handles what the user has inputted and saves it for this session
