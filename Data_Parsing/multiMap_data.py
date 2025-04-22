@@ -134,8 +134,13 @@ class Food_Data:
             matching_keys = exponential_search(sorted_keys, value_range)
         else:
             raise ValueError("Unsupported search algorithm.")
-
         matched_ids = set()
         for key in matching_keys:
             matched_ids.update(sorted_dict[key])
         return matched_ids
+      
+ def get_Max_Interface(self):
+        answer = []
+        for nutrient in self.interface:
+            answer.append(nutrient.keys()[-1])
+        return answer

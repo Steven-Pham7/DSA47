@@ -33,3 +33,23 @@ def Parse_data(filePath, labelFilePath, offset, idColumn):
     data.sort_interface()
     return data
 
+
+def pretitfyLabels(labelFilePath):
+    labels = pd.read_csv(labelFilePath).columns
+    prettyLabels = []
+    for label in labels:
+        temp = label.replace("Data.",'')
+        temp = temp.replace("Fat.", '')
+        temp = temp.replace("Major Minerals.", '')
+        temp = temp.replace("Vitamins.", '')
+        prettyLabels.append(temp)
+    return prettyLabels
+
+
+def getMaxValues(FoodData, labels):
+    maxValues = FoodData.get_Max_Interface()
+    answer = dict()
+    for maxValue, label in zip(maxValues, labels[3:]):
+        answer[label] = maxValue
+    return answer
+
