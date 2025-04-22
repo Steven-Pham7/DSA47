@@ -223,11 +223,11 @@ elif st.session_state.step == 3:
     # option_index["Vitamin K"] = 17
 
     if "list1" not in st.session_state:
-        st.session_state.list1 = ()
+        st.session_state.list1 = []
     if "list2" not in st.session_state:
-        st.session_state.list2 = ()        
+        st.session_state.list2 = []
     if "list3" not in st.session_state:
-        st.session_state.list3 = ()
+        st.session_state.list3 = []
     if "data_Frame" not in st.session_state:
         st.session_state.data_frame = pd.DataFrame()
         
@@ -237,7 +237,8 @@ elif st.session_state.step == 3:
         st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
         for something in st.session_state.list1:
             temp = pd.DataFrame([st.session_state.data.get_data(something)])
-            st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+            st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
+        st.session_state.data_frame.columns = ["Category","Description","Nutrient Data Bank Number"] + st.session_state.options
     elif st.session_state.searching_Algo == "Exponential Search":
         st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
 
