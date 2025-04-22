@@ -42,7 +42,7 @@ def exponential_search(sorted_keys, target_range):
     return result
 
 
-def search_nutrient(self, nutrient_index, value_range, algorithm):
+def search_nutrient(nutrient_index, value_range, algorithm, food_data):
     """
     Searches for food IDs whose nutrient value at a given index falls within a range.
     :nutrient_index: Index of the nutrient in the interface.
@@ -50,7 +50,7 @@ def search_nutrient(self, nutrient_index, value_range, algorithm):
     :algorithm: "Jump" or "Exponential"
     :return: A set of matching food IDs.
     """
-    sorted_dict = self.interface[nutrient_index]
+    sorted_dict = food_data.interface[nutrient_index]
     sorted_keys = list(sorted_dict.keys())
 
     if algorithm == "Jump":

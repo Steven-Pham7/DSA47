@@ -1,19 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-#def print_hi(name):
-#    # Use a breakpoint in the code line below to debug your script.
-#    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-# if __name__ == '__main__':
-#    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
 ############################################################################
 # Steven code below, download necessary modules thru the YT tutorial linked below
@@ -25,6 +9,11 @@
 import streamlit as st
 import pandas as pd
 import time
+from Search_Algo import Search_Algorithims
+from Data_Parsing import Data_Parser
+from Data_Parsing.multiMap_data import Food_Data
+
+
 
 st.title("DSA Group 47: Food Finder")
 
@@ -45,19 +34,6 @@ st.dataframe(df)
 '''
 )
 
-comment2 = (
-'''
-# creation of a form, so when a user changes the values in this
-# it doesn't rerun the program
-with st.form(key="user_submit_form"):
-    slider_value = st.slider("range", 0.00, 100.00, 0.01)
-    print(slider_value)
-    submit_button = st.form_submit_button(label="Submit")
-
-print(f"Slider value: {slider_value}")
-'''
-)
-
 # Creates 2 session states
 # step handles what step the user in on
 # info handles what the user has inputted and saves it for this session
@@ -73,8 +49,14 @@ def go_step2():
 def go_step3():
     st.session_state.step = 3
 
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FIX FILE PATHS
+st.session_state.dataFilePath = "/Users/Steven/Downloads/connecting 4-21/DSA47/Data/food.csv"
+st.session_state.labelFilePath = "/Users/Steven/Downloads/connecting 4-21/DSA47/Data/labels.csv"
+st.session_state.data = Data_Parser.Parse_data(st.session_state.dataFilePath, st.session_state.labelFilePath, 3, 2)
+
 # Go to the first step
 if st.session_state.step == 1:
+
     st.subheader("Nutrient Selector (3 max)")
     # Represents the columns (nutrition)
     options = [
@@ -178,6 +160,7 @@ elif st.session_state.step == 2:
             st.session_state.slider_range2 = ()
         if "slider_range3" not in st.session_state:
             st.session_state.slider_range3 = ()
+        # STORES THE SEARCHING ALGORITHM BEING USED
         if "searching_Algo" not in st.session_state:
             st.session_state.searching_Algo = ""
 
@@ -230,4 +213,44 @@ elif st.session_state.step == 2:
 
 # step 3
 elif st.session_state.step == 3:
+
+    option_index = {}
+    option_index["Carbohydrates"] = 0
+    option_index["Cholesterol"] = 1
+    option_index["Fiber"] = 2
+    option_index["Protein"] = 3
+    option_index["Total Sugar"] = 4
+    option_index["Monosaturated Fat"] = 5
+    option_index["Polysaturated Fat"] = 6
+    option_index["Saturated Fat"] = 7
+    option_index["Calcium"] = 8
+    option_index["Iron"] = 9
+    option_index["Magnesium"] = 10
+    option_index["Potassium"] = 11
+    option_index["Sodium (Salt)"] = 12
+    option_index["Vitamin A"] = 13
+    option_index["Vitamin B12"] = 14
+    option_index["Vitamin C"] = 15
+    option_index["Vitamin E"] = 16
+    option_index["Vitamin K"] = 17
+
+    if "list1" not in st.session_state:
+        st.session_state.list1 = ()
+    if "list2" not in st.session_state:
+        st.session_state.list2 = ()        
+    if "list3" not in st.session_state:
+        st.session_state.list3 = ()
+    if "data_Frame" not in st.session_state:
+        st.session_state.data_frame = pd.DataFrame()
+        
+
     st.write("need output")
+    if st.session_state.searching_Algo == "Jump Search":
+        st.session_state.list1 = Search_Algorithims.search_nutrient(option_index[st.session_state.info[0]], st.session_state.slider_range1, "Jump", st.session_state.data)
+        for something in st.session_state.list1:
+            temp = pd.DataFrame([st.session_state.data.get_data(something)])
+            st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+    elif st.session_state.searching_Algo == "Exponential Search":
+        st.session_state.list1 = Search_Algorithims.search_nutrient(option_index[st.session_state.info[0]], st.session_state.slider_range1, "Exponential", st.session_state.data)
+
+    st.dataframe(st.session_state.data_frame)
