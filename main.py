@@ -25,6 +25,10 @@
 import streamlit as st
 import pandas as pd
 import time
+from Data_Parsing import Data_Parser
+from Data_Parsing.multiMap_data import Food_Data
+from Search_Algo import Search_Algorithims
+
 
 st.title("DSA Group 47: Food Finder")
 
@@ -75,28 +79,34 @@ def go_step3():
 
 # Go to the first step
 if st.session_state.step == 1:
+    dataFilePath = ".\\Data\\food.csv"
+    labelFilePath = ".\\Data\\food.csv"
+    st.session_state.data = Data_Parser.Parse_data(dataFilePath, labelFilePath, 3, 2)
     st.subheader("Nutrient Selector (3 max)")
     # Represents the columns (nutrition)
-    options = [
-        "Carbohydrates",
-        "Cholesterol",
-        "Fiber",
-        "Protein",
-        "Total Sugar",
-        "Monosaturated Fat",
-        "Polysaturated Fat",
-        "Saturated Fat",
-        "Calcium",
-        "Iron",
-        "Magnesium",
-        "Potassium",
-        "Sodium (Salt)",
-        "Vitamin A",
-        "Vitamin B12",
-        "Vitamin C",
-        "Vitamin E",
-        "Vitamin K",
-    ]
+    # Data_Parser.pretitfyLabels(labelFilePath))
+    options = Data_Parser.pretitfyLabels(labelFilePath)
+    st.session_state.infoLabels = options
+    #     [
+    #     "Carbohydrates",
+    #     "Cholesterol",
+    #     "Fiber",
+    #     "Protein",
+    #     "Total Sugar",
+    #     "Monosaturated Fat",
+    #     "Polysaturated Fat",
+    #     "Saturated Fat",
+    #     "Calcium",
+    #     "Iron",
+    #     "Magnesium",
+    #     "Potassium",
+    #     "Sodium (Salt)",
+    #     "Vitamin A",
+    #     "Vitamin B12",
+    #     "Vitamin C",
+    #     "Vitamin E",
+    #     "Vitamin K",
+    # ]
 
     # create dictionary we will use later
     checked = {}
@@ -104,14 +114,14 @@ if st.session_state.step == 1:
     if "counter" not in st.session_state:
         st.session_state.counter = 0
     # creates the checkboxes
-    for nutrients in options:
+    for nutrients in options[3:]:
         checked[nutrients] = st.checkbox(label=nutrients, key=nutrients)
 
     st.session_state.counter = 0
     # clears st.sesstion_state.info to allow it to be free of any elements during the append
     st.session_state.info.clear()
     # incrementents the counter by the number of checkboxes selected
-    for nutrients in options:
+    for nutrients in options[3:]:
         if checked[nutrients] == True:
             st.session_state.counter += 1
             st.session_state.info.append(nutrients)
@@ -230,4 +240,4 @@ elif st.session_state.step == 2:
 
 # step 3
 elif st.session_state.step == 3:
-    st.write("need output")
+    st.write(Search_Algorithims.search_nutrient(st.session_state.info[0]))

@@ -1,5 +1,5 @@
 import pandas as pd
-from multiMap_data import Food_Data
+from Data_Parsing.multiMap_data import Food_Data
 
 
 def Parse_data(filePath, labelFilePath, offset, idColumn):
