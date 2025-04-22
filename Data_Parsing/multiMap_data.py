@@ -78,7 +78,13 @@ class Food_Data:
             self.interface[i] = sorteddict.SortedDict(self.interface[i])
 
     def get_Max_Interface(self):
+        """
+        Return the max values of each nutrient in the interface. Warning assumed the interface has been sorted.
+        :returns: A list of the max values of each nutrient.
+        :rtype: list[float]
+        """
         answer = []
+        # For every nutrient in the database get the last element in the set of keys which should be the max.
         for nutrient in self.interface:
             answer.append(float(nutrient.keys()[-1]))
         return answer
