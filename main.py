@@ -35,16 +35,20 @@ def go_step3():
     st.session_state.step = 3
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FIX FILE PATHS
-st.session_state.dataFilePath = "./Data/food.csv"
-st.session_state.labelFilePath = "./Data/labels.csv"
-st.session_state.data = Data_Parser.Parse_data(st.session_state.dataFilePath, st.session_state.labelFilePath, 3, 2)
+
+
+if "data" not in st.session_state:
+    st.session_state.dataFilePath = "./Data/food.csv"
+    st.session_state.labelFilePath = "./Data/labels.csv"
+    st.session_state.data = Data_Parser.Parse_data(st.session_state.dataFilePath, st.session_state.labelFilePath, 3, 2)
 
 # Go to the first step
 if st.session_state.step == 1:
 
     st.subheader("Nutrient Selector (3 max)")
     # Represents the columns (nutrition)
-    st.session_state.options = Data_Parser.pretitfyLabels(st.session_state.labelFilePath, 3)
+    if "options" not in st.session_state:
+        st.session_state.options = Data_Parser.pretitfyLabels(st.session_state.labelFilePath, 3)
     #     [
     #     "Carbohydrates",
     #     "Cholesterol",
@@ -115,6 +119,9 @@ elif st.session_state.step == 2:
     # dictionary of the columns max values
     # all values are floats, true values are commented if they were reduced to 1 decimal place
     max_value = Data_Parser.getMaxValues(st.session_state.data, st.session_state.options, 0)
+    if st.button("Back"):
+        st.session_state.step = 1
+        st.rerun()
     # max_value["Carbohydrates"] = 100.0
     # max_value["Cholesterol"] = 3074.0
     # max_value["Fiber"] = 46.2
@@ -198,7 +205,6 @@ elif st.session_state.step == 2:
                     slider_test()
                     go_step3()
                     st.rerun()
-
 # step 3
 elif st.session_state.step == 3:
 
@@ -221,6 +227,9 @@ elif st.session_state.step == 3:
     # option_index["Vitamin C"] = 15
     # option_index["Vitamin E"] = 16
     # option_index["Vitamin K"] = 17
+    if st.button("Back"):
+        st.session_state.step = 2
+        st.rerun()
 
     if "list1" not in st.session_state:
         st.session_state.list1 = []
@@ -241,6 +250,7 @@ elif st.session_state.step == 3:
     #     st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp], ignore_index=True)
     # st.session_state.data_frame.columns = ["Category", "Description",
     #                                        "Nutrient Data Bank Number"] + st.session_state.options
+    # st.session_state.data_frame = pd.DataFrame()
     if st.session_state.searching_Algo == "Jump Search":
         if len(st.session_state.info) == 1:
             st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
