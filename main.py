@@ -234,11 +234,60 @@ elif st.session_state.step == 3:
 
     st.write("need output")
     if st.session_state.searching_Algo == "Jump Search":
-        st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
-        for something in st.session_state.list1:
-            temp = pd.DataFrame([st.session_state.data.get_data(something)])
-            st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+        if len(st.session_state.info) == 1:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+        elif len(st.session_state.info) == 2:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
+            st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Jump", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])            
+            for result in st.session_state.list2:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+        elif len(st.session_state.info) == 3:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Jump", st.session_state.data)
+            st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Jump", st.session_state.data)
+            st.session_state.list3 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[2], st.session_state.slider_range3, "Jump", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])            
+            for result in st.session_state.list2:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+            for result in st.session_state.list3:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
     elif st.session_state.searching_Algo == "Exponential Search":
-        st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
+        if len(st.session_state.info) == 1:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+        elif len(st.session_state.info) == 2:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
+            st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Exponential", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])            
+            for result in st.session_state.list2:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+        elif len(st.session_state.info) == 3:
+            st.session_state.list1 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[0], st.session_state.slider_range1, "Exponential", st.session_state.data)
+            st.session_state.list2 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[1], st.session_state.slider_range2, "Exponential", st.session_state.data)
+            st.session_state.list3 = Search_Algorithims.search_nutrient(st.session_state.infoIndex[2], st.session_state.slider_range3, "Exponential", st.session_state.data)
+            for result in st.session_state.list1:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])            
+            for result in st.session_state.list2:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
+            for result in st.session_state.list3:
+                temp = pd.DataFrame([st.session_state.data.get_data(result)])
+                st.session_state.data_frame = pd.concat([st.session_state.data_frame, temp])
 
     st.dataframe(st.session_state.data_frame)
