@@ -3,7 +3,7 @@ def jump_search(sorted_keys, target_range):
     """
     Performs Jump Search on a sorted list of keys to find values within a target range.
     Returns a list of matching keys.
-    :target_range: Tuple of (min, max) values to search within.
+    :param target_range: Tuple of (min, max) values to search within.
     """
     n = len(sorted_keys)
     step = int(math.sqrt(n))
@@ -22,7 +22,7 @@ def exponential_search(sorted_keys, target_range):
     """
     Performs Exponential Search to find a value range within a sorted list.
     Returns a list of matching keys.
-    :target_range: Tuple of (min, max) values to search within.
+    :param target_range: Tuple of (min, max) values to search within.
     """
     n = len(sorted_keys)
     if n == 0:
@@ -45,9 +45,9 @@ def exponential_search(sorted_keys, target_range):
 def search_nutrient(nutrient_index, value_range, algorithm, food_data):
     """
     Searches for food IDs whose nutrient value at a given index falls within a range.
-    :nutrient_index: Index of the nutrient in the interface.
-    :value_range: A tuple of (min, max) values to search within.
-    :algorithm: "Jump" or "Exponential"
+    :param nutrient_index: Index of the nutrient in the interface.
+    :param value_range: A tuple of (min, max) values to search within.
+    :param algorithm: "Jump" or "Exponential"
     :return: A set of matching food IDs.
     """
     sorted_dict = food_data.interface[nutrient_index]
